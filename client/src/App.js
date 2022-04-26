@@ -51,11 +51,13 @@ function App() {
     await deposit.wait();
     const balance = await provider.getBalance(contractAddress);
     setBalance(ethers.utils.formatEther(balance));
+    setDepositValue(0);
   }
 
   const handleGreetingSubmit = async (e) => {
     e.preventDefault();
-    await contract.setGreeting(greetingValue)
+    const greetingUpdate = await contract.setGreeting(greetingValue);
+    await greetingUpdate.wait();
     setGreet(greetingValue);
     setGreetingValue('');
   }
